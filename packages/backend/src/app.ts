@@ -2,6 +2,7 @@ import { App } from "@tinyhttp/app";
 import { cors } from "@tinyhttp/cors";
 import { urlencoded } from "milliparsec";
 import { rdsRouter } from "./routes/rds.js";
+import { redisRouter } from "./routes/redis.js";
 
 export const app = new App({
   onError: (err, req, res) => {
@@ -27,6 +28,7 @@ app.use(cors());
 app.use(urlencoded());
 
 app.use("/rds", rdsRouter);
+app.use("/redis", redisRouter);
 
 app.get("/", async (req, res) => {
   const url = "https://if1live.github.io/shiroko_demo/";

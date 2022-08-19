@@ -17,7 +17,10 @@
     "package": "ncc build ./src/handlers.ts -o output"
   },
   "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.150.0",
     "@aws-sdk/client-rds-data": "^3.150.0",
+    "@aws-sdk/client-sns": "^3.150.0",
+    "@aws-sdk/client-sqs": "^3.150.0",
     "@tinyhttp/app": "^2.0.22",
     "@tinyhttp/cors": "^2.0.0",
     "@tinyhttp/dotenv": "^2.0.3",

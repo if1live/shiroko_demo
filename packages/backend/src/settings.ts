@@ -6,4 +6,4 @@ export const credentials = {
   secretAccessKey: process.env.SHIROKO_SECRET_KEY!,
 };
 
-export const origin = process.env.SHIROKO_ORIGIN!;
+export const shiroki_origin = process.env.SHIROKO_ORIGIN!;

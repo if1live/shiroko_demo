@@ -4,10 +4,10 @@ import type {
 } from "@aws-sdk/client-rds-data";
 import { App } from "@tinyhttp/app";
 import { ExecuteStatementCommand, MyClient } from "../sdk/index.js";
-import { credentials, origin } from "../settings.js";
+import { credentials, shiroki_origin } from "../settings.js";
 
 const rds = new MyClient({
-  endpoint: `${origin}/runtime/dataapi/api`,
+  endpoint: `${shiroki_origin}/runtime/dataapi/api`,
   credentials,
 });
 

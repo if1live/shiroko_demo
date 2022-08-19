@@ -43,6 +43,15 @@ functions:
           method: "*"
           path: /{pathname+}
 
+  handle_sqs:
+    handler: output/index.handle_sqs
+
+  handle_sns:
+    handler: output/index.handle_sns
+
+  handle_cron:
+    handler: output/index.handle_cron
+
 plugins:
   - serverless-scriptable-plugin
 
