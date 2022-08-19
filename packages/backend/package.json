@@ -1,0 +1,35 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist .serverless output",
+    "check:watch": "tsc --watch",
+    "build": "tsc",
+    "dev": "ts-node-esm ./src/dev.ts",
+    "fix": "run-s fix:prettier",
+    "fix:prettier": "prettier --write \"{src,test,scripts}/**/*.ts\"",
+    "package": "ncc build ./src/handlers.ts -o output"
+  },
+  "dependencies": {
+    "@aws-sdk/client-rds-data": "^3.150.0",
+    "@tinyhttp/app": "^2.0.22",
+    "@tinyhttp/dotenv": "^2.0.3",
+    "@upstash/redis": "^1.11.0",
+    "milliparsec": "^2.2.2",
+    "node-fetch": "^3.2.10",
+    "serverless-http": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.102",
+    "@types/node": "^16.11.7",
+    "@vercel/ncc": "^0.34.0",
+    "serverless": "^3.21.0",
+    "serverless-scriptable-plugin": "^1.2.2"
+  }
+}

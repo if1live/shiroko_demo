@@ -1,0 +1,51 @@
+service: shiroko-demo
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+  region: ap-northeast-1
+  stage: dev
+
+  memorySize: 128
+  architecture: arm64
+
+  logRetentionInDays: 7
+  versionFunctions: false
+
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    STAGE: ${self:provider.stage}
+
+    SHIROKO_API_KEY: ${env:SHIROKO_API_KEY}
+    SHIROKO_SECRET_KEY: ${env:SHIROKO_SECRET_KEY}
+    SHIROKO_ORIGIN: ${env:SHIROKO_ORIGIN}
+
+package:
+  patterns:
+    - "!**"
+    - "!node_modules/**"
+    - output/*.js
+    - output/*.json
+
+functions:
+  http_handle:
+    handler: output/index.handle_http
+    events:
+      - httpApi:
+          method: "*"
+          path: /{pathname+}
+
+plugins:
+  - serverless-scriptable-plugin
+
+custom:
+  scriptHooks:
+    before:package:createDeploymentArtifacts: npm run package
