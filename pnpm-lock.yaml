@@ -22,6 +22,7 @@ importers:
     specifiers:
       '@aws-sdk/client-rds-data': ^3.150.0
       '@tinyhttp/app': ^2.0.22
+      '@tinyhttp/cors': ^2.0.0
       '@tinyhttp/dotenv': ^2.0.3
       '@types/aws-lambda': ^8.10.102
       '@types/node': ^16.11.7
@@ -35,6 +36,7 @@ importers:
     dependencies:
       '@aws-sdk/client-rds-data': 3.150.0
       '@tinyhttp/app': 2.0.22
+      '@tinyhttp/cors': 2.0.0
       '@tinyhttp/dotenv': 2.0.3
       '@upstash/redis': 1.11.0
       milliparsec: 2.2.2
@@ -1375,6 +1377,13 @@ packages:
   /@tinyhttp/cookie/2.0.4:
     resolution: {integrity: sha512-CqapJxVwoepY2r0XSDnDhZeV7aQhR1P+RiVFj3zg7w0doNepUmGcgnrSFYMuxYbd7SG0RtJ6skVG0s+9S0SUag==}
     engines: {node: '>=12.4.0'}
+    dev: false
+
+  /@tinyhttp/cors/2.0.0:
+    resolution: {integrity: sha512-IwQsPBnK+gRrhTsPA4FPOfbNzZZt8cVsOIMNFb6HzoScaiWcoLEogL0Bz/aBSm8KM13uieVXoVT6udMqhqUS2A==}
+    engines: {node: '>=12.4 || 14.x || >=16'}
+    dependencies:
+      es-vary: 0.1.2
     dev: false
 
   /@tinyhttp/dotenv/2.0.3:

@@ -1,4 +1,6 @@
-import { App, Request, Response } from "@tinyhttp/app";
+import { App } from "@tinyhttp/app";
+import { cors } from "@tinyhttp/cors";
+import { urlencoded } from "milliparsec";
 import { rdsRouter } from "./routes/rds.js";
 
 export const app = new App({
@@ -14,15 +16,19 @@ export const app = new App({
       res.status(500).json(err);
     }
   },
-  noMatchHandler: (req: Request, res: Response) => {
+  noMatchHandler: (req, res) => {
     res.status(400).json({
       message: "mismatch pattern",
     });
   },
 });
 
-app.get("/status/ok", async (req: Request, res: Response) => {
-  res.json({ ok: true });
-});
+app.use(cors());
+app.use(urlencoded());
 
 app.use("/rds", rdsRouter);
+
+app.get("/", async (req, res) => {
+  const url = "https://if1live.github.io/shiroko_demo/";
+  res.redirect(url);
+});

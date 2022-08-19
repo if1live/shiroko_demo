@@ -19,6 +19,7 @@
   "dependencies": {
     "@aws-sdk/client-rds-data": "^3.150.0",
     "@tinyhttp/app": "^2.0.22",
+    "@tinyhttp/cors": "^2.0.0",
     "@tinyhttp/dotenv": "^2.0.3",
     "@upstash/redis": "^1.11.0",
     "milliparsec": "^2.2.2",
