@@ -22,7 +22,7 @@ router.get("/execute-statement", async (req, res) => {
     resourceArn,
     secretArn,
     database,
-    sql: "select $1::integer + $2::integer",
+    sql: "select $1::integer + $2::integer as a, NOW() as b",
     parameters: [
       {
         name: "a",
