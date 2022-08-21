@@ -7,7 +7,7 @@ const redis = new Redis({
   token: `${credentials.accessKeyId}:${credentials.secretAccessKey}`,
 });
 
-export const redisRouter: FastifyPluginAsync = async (fastify) => {
+const plugin: FastifyPluginAsync = async (fastify) => {
   fastify.get("/string", async (request, reply) => {
     await redis.set("key", "value");
     let data = await redis.get("key");
@@ -17,3 +17,5 @@ export const redisRouter: FastifyPluginAsync = async (fastify) => {
     return { data };
   });
 };
+
+export default plugin

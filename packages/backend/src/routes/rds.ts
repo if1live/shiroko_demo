@@ -15,7 +15,7 @@ const resourceArn = "sample-resourceArn";
 const secretArn = "sample-secretArn";
 const database = "sample-database";
 
-export const rdsRouter: FastifyPluginAsync = async (fastify) => {
+const plugin: FastifyPluginAsync = async (fastify) => {
   fastify.get("/execute-statement", async (request, reply) => {
     const input: ExecuteStatementCommandInput = {
       resourceArn,
@@ -42,3 +42,4 @@ export const rdsRouter: FastifyPluginAsync = async (fastify) => {
     };
   });
 };
+export default plugin;

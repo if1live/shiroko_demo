@@ -1,8 +1,8 @@
 import { default as Fastify } from "fastify";
 import { default as cors } from "@fastify/cors";
 import { default as formbody } from "@fastify/formbody";
-import { rdsRouter } from "./routes/rds.js";
-import { redisRouter } from "./routes/redis.js";
+import { default as rdsRouter } from "./routes/rds.js";
+import { default as redisRouter } from "./routes/redis.js";
 
 export function init() {
   const fastify = Fastify({});
