@@ -42,4 +42,7 @@ const plugin: FastifyPluginAsync = async (fastify) => {
     };
   });
 };
+
+(plugin as any)[Symbol.for('fastify.display-name')] = 'rds-router-plugin';
+
 export default plugin;
