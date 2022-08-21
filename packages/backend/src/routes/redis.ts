@@ -1,4 +1,4 @@
-import { App } from "@tinyhttp/app";
+import { FastifyPluginAsync } from "fastify";
 import { Redis } from "@upstash/redis/with-fetch";
 import { credentials, shiroki_origin } from "../settings.js";
 
@@ -7,15 +7,13 @@ const redis = new Redis({
   token: `${credentials.accessKeyId}:${credentials.secretAccessKey}`,
 });
 
-const router = new App();
+export const redisRouter: FastifyPluginAsync = async (fastify) => {
+  fastify.get("/string", async (request, reply) => {
+    await redis.set("key", "value");
+    let data = await redis.get("key");
+    console.log(data);
 
-router.get("/string", async (req, res) => {
-  await redis.set("key", "value");
-  let data = await redis.get("key");
-  console.log(data);
-
-  // await redis.set("key2", "value2", { ex: 1 });
-  res.json({ data });
-});
-
-export const redisRouter = router;
+    // await redis.set("key2", "value2", { ex: 1 });
+    return { data };
+  });
+};

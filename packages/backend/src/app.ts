@@ -1,36 +1,32 @@
-import { App } from "@tinyhttp/app";
-import { cors } from "@tinyhttp/cors";
-import { urlencoded } from "milliparsec";
+import { default as Fastify } from "fastify";
+import { default as cors } from "@fastify/cors";
+import { default as formbody } from "@fastify/formbody";
 import { rdsRouter } from "./routes/rds.js";
 import { redisRouter } from "./routes/redis.js";
 
-export const app = new App({
-  onError: (err, req, res) => {
-    if (err instanceof Error) {
-      const error = {
-        name: err.name,
-        message: err.message,
-        stack: err.stack,
-      };
-      res.status(400).json(error);
-    } else {
-      res.status(500).json(err);
-    }
-  },
-  noMatchHandler: (req, res) => {
-    res.status(400).json({
-      message: "mismatch pattern",
-    });
-  },
-});
+export function init() {
+  const fastify = Fastify({});
 
-app.use(cors());
-app.use(urlencoded());
+  fastify.register(cors, {});
+  fastify.register(formbody, {});
 
-app.use("/rds", rdsRouter);
-app.use("/redis", redisRouter);
+  fastify.register(rdsRouter, { prefix: "/rds" });
+  fastify.register(redisRouter, { prefix: "/redis" });
 
-app.get("/", async (req, res) => {
-  const url = "https://if1live.github.io/shiroko_demo/";
-  res.redirect(url);
-});
+  fastify.get("/", async (request, reply) => {
+    const url = "https://if1live.github.io/shiroko_demo/";
+    reply.redirect(url);
+  });
+
+  fastify.all("/dump", async (request, reply) => {
+    const data = {
+      query: request.query,
+      params: request.params,
+      body: request.body,
+    };
+    console.log(JSON.stringify(data, null, 2));
+    return {};
+  });
+
+  return fastify;
+}

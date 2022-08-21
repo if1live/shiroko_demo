@@ -1,8 +1,9 @@
 import { SQSHandler, SNSHandler, ScheduledHandler } from "aws-lambda";
-import serverless from "serverless-http";
-import { app } from "./app.js";
+import { default as awsLambdaFastify } from "@fastify/aws-lambda";
+import { init } from "./app.js";
 
-export const handle_http = serverless(app.handler.bind(app));
+const proxy = awsLambdaFastify(init());
+export const handle_http = proxy;
 
 export const handle_sqs: SQSHandler = async (event, context) => {
   console.log("aws.sqs.event", JSON.stringify(event, null, 2));
